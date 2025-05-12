@@ -11,6 +11,7 @@ const drivers = [
   { name: "Hamilton", class: "B" },
   { name: "Albon", class: "C" },
   { name: "Sainz", class: "C" },
+  { name: "Tsunoda", class: "C" },
   { name: "Ocon", class: "D" },
   { name: "Stroll", class: "D" },
   { name: "Gasly", class: "D" },
@@ -18,7 +19,6 @@ const drivers = [
   { name: "Hadjar", class: "D" },
   { name: "Alonso", class: "D" },
   { name: "Hülkenberg", class: "E" },
-  { name: "Tsunoda", class: "E" },
   { name: "Lawson", class: "E" },
   { name: "Doohan", class: "E" },
   { name: "Bortoleto", class: "E" }
