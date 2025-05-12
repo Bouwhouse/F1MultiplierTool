@@ -1,6 +1,4 @@
 ---
-
-````markdown
 # 🏎️ F1 Multiplier Tool
 
 Een webtool voor Fantasy Formule 1-spelers waarmee je eenvoudig multipliers toewijst aan je team op basis van verwachte eindposities en klasse-afhankelijke puntentabellen.
