@@ -20,7 +20,7 @@ const drivers = [
   { name: "Alonso", class: "D" },
   { name: "Hülkenberg", class: "E" },
   { name: "Lawson", class: "E" },
-  { name: "Doohan", class: "E" },
+  { name: "Colapinto", class: "E" },
   { name: "Bortoleto", class: "E" }
 ];
 
