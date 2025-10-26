@@ -18,9 +18,8 @@ const drivers = [
   { name: "Alonso", class: "D" },
   { name: "Albon", class: "D" },
   
-  { name: "Bearman", class: "D" },
-  { name: "Tsunoda", class: "D" },
-  
+  { name: "Bearman", class: "E" },
+  { name: "Tsunoda", class: "E" },
   { name: "Ocon", class: "E" },
   { name: "Lawson", class: "E" },
   { name: "Bortoleto", class: "E" },
@@ -37,5 +36,6 @@ const pointsTable = {
   D: [300, 280, 260, 240, 220, 200, 180, 160, 140, 120, 100, 90, 80, 70, 60, 50, 40, 30, 20, 10],
   E: [340, 320, 300, 280, 260, 240, 220, 200, 180, 160, 140, 120, 100, 90, 80, 70, 60, 50, 40, 30]
 };
+
 
 
