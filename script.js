@@ -3,13 +3,27 @@ document.addEventListener("DOMContentLoaded", () => {
   const resultsBody = document.getElementById("results-body");
   const STORAGE_KEY = "selectedDrivers";
 
-  drivers.forEach((driver, index) => {
-    const label = document.createElement("label");
-    label.innerHTML = `
-      <input type="checkbox" data-index="${index}" />
-      ${driver.name} (${driver.class})
-    `;
-    selectionDiv.appendChild(label);
+  const categories = ["A", "B", "C", "D", "E"];
+  const rules = { A: 2, B: 2, C: 2, D: 1, E: 1 };
+
+  categories.forEach(cat => {
+    const column = document.createElement("div");
+    column.className = `driver-column cat-${cat}`;
+    column.innerHTML = `<h3>${cat} (Pick ${rules[cat]})</h3>`;
+
+    drivers.forEach((driver, index) => {
+      if (driver.class === cat) {
+        const label = document.createElement("label");
+        label.className = `driver-label cat-${cat}`;
+        label.innerHTML = `
+          <input type="checkbox" data-index="${index}" />
+          <span>${driver.name}</span>
+          <span class="price">${driver.price}M</span>
+        `;
+        column.appendChild(label);
+      }
+    });
+    selectionDiv.appendChild(column);
   });
 
   const savedSelection = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
@@ -31,12 +45,12 @@ document.addEventListener("DOMContentLoaded", () => {
     resultsBody.innerHTML = "";
 
     const checkedBoxes = selectionDiv.querySelectorAll("input[type='checkbox']:checked");
-const selectedDrivers = Array.from(checkedBoxes)
-  .map(cb => {
-    const index = parseInt(cb.getAttribute("data-index"));
-    return { ...drivers[index], index };
-  })
-  .sort((a, b) => a.class.localeCompare(b.class));
+    const selectedDrivers = Array.from(checkedBoxes)
+      .map(cb => {
+        const index = parseInt(cb.getAttribute("data-index"));
+        return { ...drivers[index], index };
+      })
+      .sort((a, b) => a.class.localeCompare(b.class));
 
 
     selectedDrivers.forEach(driver => {
@@ -46,14 +60,39 @@ const selectedDrivers = Array.from(checkedBoxes)
         <td>${driver.name}</td>
         <td>${driver.class}</td>
         <td>
-          <input type="number" min="1" max="20" class="range-start" data-index="${driver.index}" placeholder="van" />
+          <input type="number" min="1" max="22" class="range-start" data-index="${driver.index}" placeholder="van" />
           –
-          <input type="number" min="1" max="20" class="range-end" data-index="${driver.index}" placeholder="tot" />
+          <input type="number" min="1" max="22" class="range-end" data-index="${driver.index}" placeholder="tot" />
         </td>
         <td class="points-cell" data-index="${driver.index}">-</td>
         <td class="multiplier-cell" data-index="${driver.index}">-</td>
       `;
       resultsBody.appendChild(row);
+    });
+
+    updateBudgetAndRules(selectedDrivers);
+  }
+
+  function updateBudgetAndRules(selectedDrivers) {
+    const totalPrice = selectedDrivers.reduce((sum, d) => sum + d.price, 0);
+    const priceSpan = document.getElementById("total-price");
+    priceSpan.textContent = totalPrice;
+    priceSpan.style.color = totalPrice > 100 ? "#f5222d" : "#0050b3";
+
+    const counts = { A: 0, B: 0, C: 0, D: 0, E: 0 };
+    selectedDrivers.forEach(d => counts[d.class]++);
+
+    const rules = { A: 2, B: 2, C: 2, D: 1, E: 1 };
+    Object.keys(rules).forEach(klasse => {
+      const span = document.getElementById(`rule-${klasse}`);
+      span.textContent = counts[klasse];
+      if (counts[klasse] === rules[klasse]) {
+        span.className = "valid";
+      } else if (counts[klasse] > rules[klasse]) {
+        span.className = "invalid";
+      } else {
+        span.className = "";
+      }
     });
   }
 
@@ -75,7 +114,7 @@ const selectedDrivers = Array.from(checkedBoxes)
         !isNaN(start) &&
         !isNaN(end) &&
         start >= 1 &&
-        end <= 20 &&
+        end <= 22 &&
         start <= end
       ) {
         const klasse = drivers[index].class;
