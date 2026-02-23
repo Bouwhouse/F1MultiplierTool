@@ -10,38 +10,172 @@ body {
 
 h1 {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   font-size: 2rem;
   color: #333;
 }
 
-#driver-selection {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 12px;
-  margin-bottom: 40px;
+.status-container {
+  max-width: 600px;
+  margin: 0 auto 30px;
+  background: #fff;
+  padding: 15px 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  border-bottom: 4px solid #0050b3;
 }
 
-#driver-selection label {
-  background-color: #ffffff;
-  border: 2px solid #ddd;
-  padding: 10px 12px;
-  border-radius: 8px;
-  cursor: pointer;
+#total-price {
+  font-size: 1.2rem;
+  color: #0050b3;
+}
+
+#selection-rules span {
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: #f0f0f0;
+}
+
+#selection-rules span.valid {
+  background: #e6f7ff;
+  color: #0050b3;
+}
+
+#selection-rules span.invalid {
+  background: #fff1f0;
+  color: #f5222d;
+}
+
+#driver-selection {
   display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.driver-column {
+  flex: 1;
+  min-width: 180px;
+  background: #fff;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  border-top: 5px solid #ddd;
+}
+
+.driver-column h3 {
+  margin-top: 0;
+  font-size: 1.1rem;
+  text-align: center;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #eee;
+  margin-bottom: 15px;
+}
+
+.driver-label {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
+  padding: 8px 12px;
+  margin-bottom: 8px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: #fff;
   font-weight: 500;
-  user-select: none;
   color: #333;
 }
 
-#driver-selection input[type="checkbox"] {
-  margin-right: 8px;
+.driver-label:hover {
+  filter: brightness(0.97);
+  border-color: #bbb;
 }
 
-#driver-selection label:hover {
-  background-color: #f0f0f0;
-  border-color: #bbb;
+.driver-label input {
+  margin-right: 10px;
+}
+
+.driver-label .price {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Category Colors */
+.cat-A {
+  border-top-color: #ff4d4f;
+}
+
+.cat-A h3 {
+  color: #ff4d4f;
+  border-bottom-color: #ffccc7;
+}
+
+.cat-A.driver-label:has(input:checked) {
+  background-color: #fff1f0;
+  border-color: #ff4d4f;
+}
+
+.cat-B {
+  border-top-color: #1890ff;
+}
+
+.cat-B h3 {
+  color: #1890ff;
+  border-bottom-color: #91d5ff;
+}
+
+.cat-B.driver-label:has(input:checked) {
+  background-color: #e6f7ff;
+  border-color: #1890ff;
+}
+
+.cat-C {
+  border-top-color: #52c41a;
+}
+
+.cat-C h3 {
+  color: #52c41a;
+  border-bottom-color: #b7eb8f;
+}
+
+.cat-C.driver-label:has(input:checked) {
+  background-color: #f6ffed;
+  border-color: #52c41a;
+}
+
+.cat-D {
+  border-top-color: #fa8c16;
+}
+
+.cat-D h3 {
+  color: #fa8c16;
+  border-bottom-color: #ffd8bf;
+}
+
+.cat-D.driver-label:has(input:checked) {
+  background-color: #fff7e6;
+  border-color: #fa8c16;
+}
+
+.cat-E {
+  border-top-color: #722ed1;
+}
+
+.cat-E h3 {
+  color: #722ed1;
+  border-bottom-color: #d3adf7;
+}
+
+.cat-E.driver-label:has(input:checked) {
+  background-color: #f9f0ff;
+  border-color: #722ed1;
 }
 
 table {
@@ -58,7 +192,8 @@ thead {
   color: #fff;
 }
 
-td, th {
+td,
+th {
   padding: 12px;
   border-bottom: 1px solid #eaeaea;
   text-align: center;
