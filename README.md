@@ -5,39 +5,39 @@ Een webtool voor Fantasy Formule 1-spelers waarmee je eenvoudig multipliers toew
 
 ## ✨ Functionaliteiten
 
-- ✅ Selecteer coureurs uit je fantasyteam (A t/m E-klassen)
-- 🔢 Voer verwachte eindposities in (1 t/m 20)
-- 📊 Automatische berekening van verwachte punten (per klasse)
-- 🏆 Toekenning van multipliers x8 t/m x1 op basis van punten
-- 🔁 Gelijke scores? → multipliers worden gedeeld (`x6/x5`)
-- 💾 Automatische opslag van coureurselectie in `localStorage`
+- ✅ **Gekleurde Class Columns:** Selecteer coureurs in een overzichtelijk, kleurgecodeerd dashboard (A t/m E).
+- 💰 **Budgetbeheer:** Houd je team binnen het budget van 100M met live tracking.
+- 📋 **Selectieregels:** Directe feedback of je voldoet aan de team-samenstelling (2A, 2B, 2C, 1D, 1E).
+- 🔢 **Uitgebreide Eindposities:** Voer posities in van 1 t/m 22 (nu met volledige grid-ondersteuning).
+- 📊 **Automatische berekening:** Verwachte punten per klasse, inclusief gemiddelden bij ranges.
+- 🏆 **Multiplier Toekenning:** Automatische multipliers x8 t/m x1 op basis van berekende punten.
+- 🔁 **Tie-breaker:** Gelijke scores? Multipliers worden eerlijk gedeeld (bijv. `x6/x5`).
+- 💾 **Auto-save:** Je selectie wordt onthouden via `localStorage`.
 
 ## 📂 Bestanden
 
 | Bestand       | Functie                                                |
 |---------------|---------------------------------------------------------|
-| `index.html`  | HTML-structuur van de app                              |
-| `style.css`   | Styling van de layout en tabel                         |
-| `data.js`     | Coureurs & puntentabel per klasse                      |
-| `script.js`   | Alle interactie: selectie, input, berekening, opslag   |
+| `index.html`  | De basisstructuur van de app                           |
+| `style.css`   | Premium styling, grid-layouts en klasse-kleuren         |
+| `data.js`     | Coureurs (naam, prijs, klasse) & puntentabel           |
+| `script.js`   | Logica voor selectie, budget, rules en multipliers     |
 
 ## 🔧 Zelf aanpassen
 
-### ➕ Coureurs toevoegen
+### ➕ Coureurs toevoegen of namen corrigeren
 Open `data.js` en voeg toe aan de `drivers` array:
 
 ```js
-{ name: \"NieuweCoureur\", class: \"B\" }
-````
+{ name: "Pérez", class: "E", price: 4 }
+```
 
 ### 🧮 Punten aanpassen
-
-Wijzig per klasse in `pointsTable`:
+Wijzig de arrays in `pointsTable` (nu ondersteund tot positie 22):
 
 ```js
 pointsTable = {
-  A: [120, 100, ...], // per positie
-  B: [160, 140, ...],
+  A: [120, 100, ..., 0, 0], // positie 1 t/m 22
   ...
 }
 ```
@@ -65,10 +65,3 @@ De tool gebruikt `localStorage` om jouw geselecteerde coureurs te onthouden tuss
 ## 📄 Licentie
 
 MIT-licentie. Gebruik het vrij voor je eigen fantasy plezier!
-
-```
-
----
-
-Laat me weten of je ook een favicon, deploy via GitHub Pages of zip-bestand wilt genereren voor snelle deling.
-```
