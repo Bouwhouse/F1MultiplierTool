@@ -12,6 +12,7 @@ Een webtool voor Fantasy Formule 1-spelers waarmee je eenvoudig multipliers toew
 - 📊 **Automatische berekening:** Verwachte punten per klasse, inclusief gemiddelden bij ranges.
 - 🏆 **Multiplier Toekenning:** Automatische multipliers x8 t/m x1 op basis van berekende punten.
 - 🔁 **Tie-breaker:** Gelijke scores? Multipliers worden eerlijk gedeeld (bijv. `x6/x5`).
+- 📲 **Team Delen:** Kopieer je selectie en multipliers met één klik naar je klembord om te delen via WhatsApp of Discord.
 - 💾 **Auto-save:** Je selectie wordt onthouden via `localStorage`.
 
 ## 📂 Bestanden
@@ -58,9 +59,13 @@ De tool gebruikt `localStorage` om jouw geselecteerde coureurs te onthouden tuss
 
 ## 📌 Roadmap (mogelijk later)
 
-* [ ] Handmatige toekenning bij ties (drag & drop of dropdown)
-* [ ] Opslaan en herstellen van verwachte posities
-* [ ] Export naar CSV of PDF
+- [x] Extend points table to 22 positions
+- [x] Correct driver names with proper accents
+- [x] Update README.md with new features and instructions
+- [x] Add simplified 'Copy Team' functionality
+- [ ] Handmatige toekenning bij ties (drag & drop of dropdown)
+- [ ] Opslaan en herstellen van verwachte posities
+- [ ] Export naar CSV of PDF
 
 ## 📄 Licentie
 

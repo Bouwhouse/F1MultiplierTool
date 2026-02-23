@@ -221,3 +221,36 @@ td input[type="number"]:focus {
 tr:hover {
   background-color: #f5faff;
 }
+
+#share-container {
+  margin-top: 20px;
+  justify-content: flex-start;
+  gap: 20px;
+}
+
+.share-title {
+  font-size: 1rem;
+}
+
+.share-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.share-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  color: white;
+  transition: opacity 0.2s;
+}
+
+.share-btn:hover {
+  opacity: 0.9;
+}
+
+.share-btn.copy {
+  background-color: #0050b3;
+}

@@ -73,6 +73,74 @@ document.addEventListener("DOMContentLoaded", () => {
     updateBudgetAndRules(selectedDrivers);
   }
 
+  function getTeamOnly() {
+    const rows = Array.from(resultsBody.querySelectorAll("tr"));
+    if (rows.length === 0) return "Geen team geselecteerd.";
+    let lines = ["🏎️ Mijn F1 Team 🏎️", ""];
+    rows.forEach(row => {
+      const name = row.cells[0].textContent.trim();
+      const classLetter = row.cells[1].textContent.trim();
+      lines.push(`• ${name} (${classLetter})`);
+    });
+    const totalPrice = document.getElementById("total-price").textContent;
+    lines.push(`\n💰 Budget: ${totalPrice}/100M`);
+    return lines.join("\n");
+  }
+
+  function getTeamWithMultipliers() {
+    const rows = Array.from(resultsBody.querySelectorAll("tr"));
+    if (rows.length === 0) return "Geen team geselecteerd.";
+    let lines = ["🏎️ Mijn F1 Team & Multipliers 🏎️", ""];
+    rows.forEach(row => {
+      const name = row.cells[0].textContent.trim();
+      const classLetter = row.cells[1].textContent.trim();
+      const multiplier = row.querySelector(".multiplier-cell").textContent.trim();
+      lines.push(`• ${name} (${classLetter}): **${multiplier}**`);
+    });
+    const totalPrice = document.getElementById("total-price").textContent;
+    lines.push(`\n💰 Budget: ${totalPrice}/100M`);
+    return lines.join("\n");
+  }
+
+  function fallbackCopy(text) {
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.style.cssText = "position:fixed;opacity:0;top:0;left:0";
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    const ok = document.execCommand("copy");
+    document.body.removeChild(ta);
+    return ok;
+  }
+
+  function copyToClipboard(text, btn) {
+    const originalText = btn.textContent;
+    const onSuccess = () => {
+      btn.textContent = "Gekopieerd! ✅";
+      setTimeout(() => btn.textContent = originalText, 2000);
+    };
+    const onFail = () => {
+      btn.textContent = "Mislukt ❌";
+      setTimeout(() => btn.textContent = originalText, 2000);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(onSuccess).catch(() => {
+        fallbackCopy(text) ? onSuccess() : onFail();
+      });
+    } else {
+      fallbackCopy(text) ? onSuccess() : onFail();
+    }
+  }
+
+  document.getElementById("copy-team-only").addEventListener("click", function () {
+    copyToClipboard(getTeamOnly(), this);
+  });
+
+  document.getElementById("copy-team-multipliers").addEventListener("click", function () {
+    copyToClipboard(getTeamWithMultipliers(), this);
+  });
+
   function updateBudgetAndRules(selectedDrivers) {
     const totalPrice = selectedDrivers.reduce((sum, d) => sum + d.price, 0);
     const priceSpan = document.getElementById("total-price");

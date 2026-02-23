@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>F1 Multiplier Tool</title>
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
   <h1>F1 Multiplier Calculator</h1>
   <div id="budget-status" class="status-container">
     <div>Budget: <span id="total-price">0</span> / 100M</div>
     <div id="selection-rules">
-      Rules: <span id="rule-A">0</span>/2A, <span id="rule-B">0</span>/2B, <span id="rule-C">0</span>/2C, <span id="rule-D">0</span>/1D, <span id="rule-E">0</span>/1E
+      Rules: <span id="rule-A">0</span>/2A, <span id="rule-B">0</span>/2B, <span id="rule-C">0</span>/2C, <span
+        id="rule-D">0</span>/1D, <span id="rule-E">0</span>/1E
     </div>
   </div>
   <div id="driver-selection"></div>
@@ -28,7 +31,16 @@
     <tbody id="results-body"></tbody>
   </table>
 
+  <div id="share-container" class="status-container">
+    <div class="share-title">Team delen:</div>
+    <div class="share-buttons">
+      <button id="copy-team-only" class="share-btn copy">Kopieer Team</button>
+      <button id="copy-team-multipliers" class="share-btn copy">Kopieer Team & Multipliers</button>
+    </div>
+  </div>
+
   <script src="data.js"></script>
   <script src="script.js"></script>
 </body>
+
 </html>
