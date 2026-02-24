@@ -1,70 +1,87 @@
 ---
-# 🏎️ F1 Multiplier Tool
+# 🏁 F1 Multiplier Tool
 
-Een webtool voor Fantasy Formule 1-spelers waarmee je eenvoudig multipliers toewijst aan je team op basis van verwachte eindposities en klasse-afhankelijke puntentabellen.
+Een webtool voor Fantasy Formule 1-spelers (Scorito) waarmee je eenvoudig multipliers toewijst aan je team op basis van verwachte eindposities en klasse-afhankelijke puntentabellen.
+
+Gemaakt met ❤️ door **Bouwhouse** · Team Triumph — voor de Scorito community.
 
 ## ✨ Functionaliteiten
 
 - ✅ **Gekleurde Class Columns:** Selecteer coureurs in een overzichtelijk, kleurgecodeerd dashboard (A t/m E).
+- 🎨 **Team Livery Kleuren:** Teamnamen worden weergegeven in de officiële 2025 F1 teamkleuren (Ferrari rood, McLaren oranje, enz.).
 - 💰 **Budgetbeheer:** Houd je team binnen het budget van 100M met live tracking.
 - 📋 **Selectieregels:** Directe feedback of je voldoet aan de team-samenstelling (2A, 2B, 2C, 1D, 1E).
-- 🔢 **Uitgebreide Eindposities:** Voer posities in van 1 t/m 22 (nu met volledige grid-ondersteuning).
-- 📊 **Automatische berekening:** Verwachte punten per klasse, inclusief gemiddelden bij ranges.
+- 🔢 **Volledige Grid-ondersteuning:** Voer positieranges in van 1 t/m 22.
+- 📊 **Automatische berekening:** Verwachte punten per klasse, inclusief gemiddelden bij positieranges.
 - 🏆 **Multiplier Toekenning:** Automatische multipliers x8 t/m x1 op basis van berekende punten.
 - 🔁 **Tie-breaker:** Gelijke scores? Multipliers worden eerlijk gedeeld (bijv. `x6/x5`).
-- 📲 **Team Delen:** Kopieer je selectie en multipliers met één klik naar je klembord om te delen via WhatsApp of Discord.
-- 💾 **Auto-save:** Je selectie wordt onthouden via `localStorage`.
+- 📲 **Team Delen:** Kopieer je selectie en/of multipliers met één klik naar het klembord (WhatsApp, Discord, enz.).
+- 💾 **Auto-save:** Je coureursselectie wordt automatisch onthouden via `localStorage`.
 
 ## 📂 Bestanden
 
-| Bestand       | Functie                                                |
-|---------------|---------------------------------------------------------|
-| `index.html`  | De basisstructuur van de app                           |
-| `style.css`   | Premium styling, grid-layouts en klasse-kleuren         |
-| `data.js`     | Coureurs (naam, prijs, klasse) & puntentabel           |
-| `script.js`   | Logica voor selectie, budget, rules en multipliers     |
+| Bestand       | Functie                                                         |
+|---------------|-----------------------------------------------------------------|
+| `index.html`  | HTML-structuur van de app                                       |
+| `style.css`   | Racing-thema: Rajdhani/Inter fonts, F1-rood, gouden multipliers |
+| `data.js`     | Coureurs (naam, klasse, prijs, team) & puntentabel per klasse   |
+| `script.js`   | Logica voor selectie, budget, regels, berekening en multipliers  |
 
 ## 🔧 Zelf aanpassen
 
-### ➕ Coureurs toevoegen of namen corrigeren
+### ➕ Coureurs toevoegen of aanpassen
+
 Open `data.js` en voeg toe aan de `drivers` array:
 
 ```js
-{ name: "Pérez", class: "E", price: 4 }
+{ name: "Pérez", class: "E", price: 4, team: "Cadillac" }
 ```
 
-### 🧮 Punten aanpassen
-Wijzig de arrays in `pointsTable` (nu ondersteund tot positie 22):
+Het `team`-veld is nodig voor de juiste teamkleur in de UI.
+
+### 🧮 Puntentabel aanpassen
+
+Wijzig de arrays in `pointsTable` (positie 1 t/m 22):
 
 ```js
-pointsTable = {
-  A: [120, 100, ..., 0, 0], // positie 1 t/m 22
-  ...
+const pointsTable = {
+  A: [120, 100, 90, ..., 0, 0], // positie 1 t/m 22
+  E: [340, 320, 300, ..., 10],  // hogere klasse = meer punten
 }
 ```
 
-## 🚀 Installatie
+### 🎨 Teamkleuren aanpassen
 
-Geen installatie nodig — gewoon openen in je browser:
+In `style.css`, zoek het blok `/* Team Colors */` en pas de hex-waarden aan:
 
-```bash
-git clone https://github.com/jouw-gebruikersnaam/f1-multiplier-tool.git
-cd f1-multiplier-tool
-open index.html  # of dubbelklik het bestand
+```css
+.team[data-team="Ferrari"] { color: #DC0000; font-weight: 600; }
 ```
 
-## 🔒 Opslag
+## 🚀 Gebruik
 
-De tool gebruikt `localStorage` om jouw geselecteerde coureurs te onthouden tussen sessies. Alles blijft lokaal — geen gegevens worden verstuurd.
+Geen installatie nodig — open gewoon in je browser:
 
-## 📌 Roadmap (mogelijk later)
+```bash
+git clone https://github.com/Bouwhouse/F1MultiplierTool.git
+cd F1MultiplierTool
+# Dubbelklik index.html, of start een lokale server:
+python3 -m http.server 8000
+```
 
-- [x] Extend points table to 22 positions
-- [x] Correct driver names with proper accents
-- [x] Update README.md with new features and instructions
-- [x] Add simplified 'Copy Team' functionality
+## 🔒 Privacy
+
+De tool gebruikt `localStorage` om je coureursselectie te onthouden. Er worden geen gegevens verstuurd — alles blijft lokaal in je browser.
+
+## 📌 Roadmap
+
+- [x] Puntentabel uitgebreid naar 22 posities
+- [x] Coureursnamen met juiste accenten
+- [x] Vereenvoudigde "Kopieer Team" functionaliteit
+- [x] Modern racing-thema (Rajdhani font, F1-rood, gouden multipliers)
+- [x] Officiële F1 teamkleuren in coureursselectie
+- [x] Positie-invoer behouden bij her-selectie van coureurs
 - [ ] Handmatige toekenning bij ties (drag & drop of dropdown)
-- [ ] Opslaan en herstellen van verwachte posities
 - [ ] Export naar CSV of PDF
 
 ## 📄 Licentie

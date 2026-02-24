@@ -1,80 +1,137 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --bg: #f4f4f4;
+  --surface: #ffffff;
+  --surface-2: #f8f8f8;
+  --border: #e0e0e0;
+  --text: #111111;
+  --text-muted: #888;
+  --red: #e10600;
+  --gold: #c08000;
+}
 
 body {
   font-family: 'Inter', sans-serif;
-  background-color: #f5f7fa;
+  background-color: var(--bg);
   margin: 0;
   padding: 30px;
-  color: #222;
+  color: var(--text);
 }
 
 h1 {
+  font-family: 'Rajdhani', sans-serif;
   text-align: center;
-  margin-bottom: 20px;
-  font-size: 2rem;
-  color: #333;
+  margin-bottom: 28px;
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  position: relative;
+  padding-bottom: 16px;
+}
+
+h1::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 64px;
+  height: 3px;
+  background: var(--red);
+  border-radius: 2px;
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto 30px;
 }
 
 .status-container {
-  max-width: 600px;
-  margin: 0 auto 30px;
-  background: #fff;
+  flex: 1;
+  background: var(--surface);
   padding: 15px 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-weight: 600;
-  border-bottom: 4px solid #0050b3;
+  border: 1px solid var(--border);
+  border-bottom: 3px solid var(--red);
 }
 
 #total-price {
-  font-size: 1.2rem;
-  color: #0050b3;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--red);
+}
+
+#selection-rules {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 #selection-rules span {
-  padding: 2px 6px;
+  padding: 3px 8px;
   border-radius: 4px;
-  background: #f0f0f0;
+  background: var(--surface-2);
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  border: 1px solid var(--border);
 }
 
 #selection-rules span.valid {
-  background: #e6f7ff;
-  color: #0050b3;
+  background: rgba(82, 196, 26, 0.12);
+  color: #73d13d;
+  border-color: rgba(82, 196, 26, 0.3);
 }
 
 #selection-rules span.invalid {
-  background: #fff1f0;
-  color: #f5222d;
+  background: rgba(225, 6, 0, 0.12);
+  color: #ff4d4f;
+  border-color: rgba(225, 6, 0, 0.3);
 }
 
 #driver-selection {
   display: flex;
   justify-content: space-between;
   gap: 15px;
-  margin-bottom: 40px;
+  max-width: 1200px;
+  margin: 0 auto 40px;
   flex-wrap: wrap;
 }
 
 .driver-column {
   flex: 1;
   min-width: 180px;
-  background: #fff;
+  background: var(--surface);
   padding: 15px;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  border-top: 5px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--border);
 }
 
 .driver-column h3 {
+  font-family: 'Rajdhani', sans-serif;
   margin-top: 0;
-  font-size: 1.1rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
   text-align: center;
   padding-bottom: 10px;
-  border-bottom: 2px solid #eee;
-  margin-bottom: 15px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 14px;
 }
 
 .driver-label {
@@ -82,154 +139,164 @@ h1 {
   justify-content: space-between;
   align-items: center;
   padding: 8px 12px;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   border-radius: 6px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border);
   cursor: pointer;
-  transition: all 0.2s;
-  background: #fff;
+  transition: background 0.15s, border-color 0.15s;
+  background: var(--surface-2);
   font-weight: 500;
-  color: #333;
+  color: var(--text);
 }
 
 .driver-label:hover {
-  filter: brightness(0.97);
+  background: #f0f0f0;
   border-color: #bbb;
+}
+
+.driver-label .driver-info {
+  display: flex;
+  align-items: center;
 }
 
 .driver-label input {
   margin-right: 10px;
+  accent-color: var(--red);
+}
+
+.driver-label .name-team {
+  display: flex;
+  flex-direction: column;
+}
+
+.driver-label .name {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.driver-label .team {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-weight: 400;
 }
 
 .driver-label .price {
-  font-weight: 600;
-  font-size: 0.9rem;
-  color: #666;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text-muted);
 }
 
 /* Category Colors */
-.cat-A {
-  border-top-color: #ff4d4f;
+.cat-A { border-top-color: #e10600; }
+.cat-A h3 { color: #e10600; }
+.cat-A.driver-label.selected {
+  background-color: rgba(225, 6, 0, 0.12);
+  border-color: rgba(225, 6, 0, 0.6);
 }
 
-.cat-A h3 {
-  color: #ff4d4f;
-  border-bottom-color: #ffccc7;
+.cat-B { border-top-color: #40a9ff; }
+.cat-B h3 { color: #40a9ff; }
+.cat-B.driver-label.selected {
+  background-color: rgba(64, 169, 255, 0.12);
+  border-color: rgba(64, 169, 255, 0.6);
 }
 
-.cat-A.driver-label:has(input:checked) {
-  background-color: #fff1f0;
-  border-color: #ff4d4f;
+.cat-C { border-top-color: #52c41a; }
+.cat-C h3 { color: #52c41a; }
+.cat-C.driver-label.selected {
+  background-color: rgba(82, 196, 26, 0.12);
+  border-color: rgba(82, 196, 26, 0.6);
 }
 
-.cat-B {
-  border-top-color: #1890ff;
+.cat-D { border-top-color: #fa8c16; }
+.cat-D h3 { color: #fa8c16; }
+.cat-D.driver-label.selected {
+  background-color: rgba(250, 140, 22, 0.12);
+  border-color: rgba(250, 140, 22, 0.6);
 }
 
-.cat-B h3 {
-  color: #1890ff;
-  border-bottom-color: #91d5ff;
-}
-
-.cat-B.driver-label:has(input:checked) {
-  background-color: #e6f7ff;
-  border-color: #1890ff;
-}
-
-.cat-C {
-  border-top-color: #52c41a;
-}
-
-.cat-C h3 {
-  color: #52c41a;
-  border-bottom-color: #b7eb8f;
-}
-
-.cat-C.driver-label:has(input:checked) {
-  background-color: #f6ffed;
-  border-color: #52c41a;
-}
-
-.cat-D {
-  border-top-color: #fa8c16;
-}
-
-.cat-D h3 {
-  color: #fa8c16;
-  border-bottom-color: #ffd8bf;
-}
-
-.cat-D.driver-label:has(input:checked) {
-  background-color: #fff7e6;
-  border-color: #fa8c16;
-}
-
-.cat-E {
-  border-top-color: #722ed1;
-}
-
-.cat-E h3 {
-  color: #722ed1;
-  border-bottom-color: #d3adf7;
-}
-
-.cat-E.driver-label:has(input:checked) {
-  background-color: #f9f0ff;
-  border-color: #722ed1;
+.cat-E { border-top-color: #9254de; }
+.cat-E h3 { color: #9254de; }
+.cat-E.driver-label.selected {
+  background-color: rgba(146, 84, 222, 0.12);
+  border-color: rgba(146, 84, 222, 0.6);
 }
 
 table {
   width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
   border-collapse: collapse;
-  background-color: #fff;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  background-color: var(--surface);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
   border-radius: 8px;
   overflow: hidden;
+  border: 1px solid var(--border);
 }
 
 thead {
-  background-color: #0050b3;
-  color: #fff;
+  background-color: #1a1a1a;
+  border-bottom: 2px solid var(--red);
 }
 
-td,
-th {
-  padding: 12px;
-  border-bottom: 1px solid #eaeaea;
+thead tr:hover {
+  background-color: #1a1a1a;
+}
+
+td, th {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
   text-align: center;
   font-size: 0.95rem;
+}
+
+th {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-muted);
 }
 
 td input[type="number"] {
   width: 60px;
   padding: 5px;
   text-align: center;
-  border: 1px solid #ccc;
+  border: 1px solid var(--border);
   border-radius: 5px;
+  background: var(--surface-2);
+  color: var(--text);
 }
 
 td input[type="number"]:focus {
-  border-color: #007bff;
+  border-color: var(--red);
   outline: none;
+  box-shadow: 0 0 0 2px rgba(225, 6, 0, 0.2);
 }
 
 .multiplier-cell {
-  font-weight: bold;
-  color: #007bff;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--gold);
 }
 
 tr:hover {
-  background-color: #f5faff;
+  background-color: var(--surface-2);
 }
 
 #share-container {
-  margin-top: 20px;
-  justify-content: flex-start;
+  justify-content: flex-end;
   gap: 20px;
 }
 
 .share-title {
-  font-size: 1rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  white-space: nowrap;
 }
 
 .share-buttons {
@@ -238,19 +305,74 @@ tr:hover {
 }
 
 .share-btn {
-  padding: 8px 16px;
+  padding: 8px 18px;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  font-weight: 600;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
   color: white;
-  transition: opacity 0.2s;
+  transition: transform 0.12s, box-shadow 0.12s;
 }
 
 .share-btn:hover {
-  opacity: 0.9;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.share-btn:active {
+  transform: translateY(0);
+  box-shadow: none;
 }
 
 .share-btn.copy {
-  background-color: #0050b3;
+  background-color: var(--red);
+}
+
+.share-btn.reset {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+}
+
+.share-btn.reset:hover {
+  border-color: #555;
+  color: var(--text);
+  box-shadow: none;
+  transform: none;
+}
+
+td input[type="number"].range-invalid {
+  border-color: var(--red);
+  background-color: rgba(225, 6, 0, 0.06);
+}
+
+/* Team Colors */
+.team[data-team="Red Bull"]      { color: #3671C6; font-weight: 600; }
+.team[data-team="Mercedes"]      { color: #00A19C; font-weight: 600; }
+.team[data-team="McLaren"]       { color: #FF8000; font-weight: 600; }
+.team[data-team="Ferrari"]       { color: #DC0000; font-weight: 600; }
+.team[data-team="Williams"]      { color: #005AFF; font-weight: 600; }
+.team[data-team="Haas"]          { color: #888888; font-weight: 600; }
+.team[data-team="Alpine"]        { color: #0090FF; font-weight: 600; }
+.team[data-team="Racing Bulls"]  { color: #6692FF; font-weight: 600; }
+.team[data-team="Aston Martin"]  { color: #358C75; font-weight: 600; }
+.team[data-team="Audi"]          { color: #444444; font-weight: 600; }
+.team[data-team="Cadillac"]      { color: #0033A0; font-weight: 600; }
+
+footer {
+  max-width: 1200px;
+  margin: 36px auto 0;
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  letter-spacing: 0.3px;
+}
+
+footer strong {
+  color: var(--red);
+  font-weight: 700;
 }
