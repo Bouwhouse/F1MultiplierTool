@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const STORAGE_KEY = "selectedDrivers";
 
   const categories = ["A", "B", "C", "D", "E"];
-  const rules = { A: 2, B: 2, C: 2, D: 1, E: 1 };
+  const rules = { A: 1, B: 2, C: 2, D: 1, E: 2 };
 
   categories.forEach(cat => {
     const column = document.createElement("div");
@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <div class="driver-info">
             <input type="checkbox" data-index="${index}" />
             <div class="name-team">
-              <span class="name">${driver.name}</span>
+              <span class="name"><span class="fi fi-${driver.flag} flag-icon"></span> ${driver.name}</span>
               <span class="team" data-team="${driver.team}">${driver.team}</span>
             </div>
           </div>
@@ -59,6 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   document.getElementById("reset-btn").addEventListener("click", () => {
+    if (!confirm("Weet je zeker dat je het team wilt resetten?")) return;
     selectionDiv.querySelectorAll("input[type='checkbox']").forEach(cb => {
       cb.checked = false;
       cb.closest(".driver-label").classList.remove("selected");
@@ -111,10 +112,24 @@ document.addEventListener("DOMContentLoaded", () => {
         if (start) row.querySelector(".range-start").value = start;
         if (end) row.querySelector(".range-end").value = end;
       }
+
+      // Fix #4: auto-swap start/end on blur
+      const startInput = row.querySelector(".range-start");
+      const endInput = row.querySelector(".range-end");
+      function autoSwap() {
+        const s = parseInt(startInput.value);
+        const e = parseInt(endInput.value);
+        if (!isNaN(s) && !isNaN(e) && s > e) {
+          startInput.value = e;
+          endInput.value = s;
+        }
+      }
+      startInput.addEventListener("blur", autoSwap);
+      endInput.addEventListener("blur", autoSwap);
     });
 
     updateBudgetAndRules(selectedDrivers);
-    resultsBody.dispatchEvent(new Event("input"));
+    recalculate();
   }
 
   function getTeamOnly() {
@@ -189,12 +204,24 @@ document.addEventListener("DOMContentLoaded", () => {
   function updateBudgetAndRules(selectedDrivers) {
     const totalPrice = selectedDrivers.reduce((sum, d) => sum + d.price, 0);
     const priceSpan = document.getElementById("total-price");
+    const wasOver = priceSpan.classList.contains("over-budget");
+    const isOver = totalPrice > 100;
+
     priceSpan.textContent = totalPrice;
-    priceSpan.style.color = totalPrice > 100 ? "#f5222d" : "#0050b3";
+    priceSpan.style.color = isOver ? "#f5222d" : "#0050b3";
+
+    // Fix #5: shake animation when going over budget
+    if (isOver && !wasOver) {
+      priceSpan.classList.add("over-budget", "shake");
+      priceSpan.addEventListener("animationend", () => priceSpan.classList.remove("shake"), { once: true });
+    } else if (!isOver) {
+      priceSpan.classList.remove("over-budget");
+    }
 
     const counts = { A: 0, B: 0, C: 0, D: 0, E: 0 };
     selectedDrivers.forEach(d => counts[d.class]++);
 
+    let allValid = true;
     Object.keys(rules).forEach(klasse => {
       const span = document.getElementById(`rule-${klasse}`);
       span.textContent = counts[klasse];
@@ -202,13 +229,38 @@ document.addEventListener("DOMContentLoaded", () => {
         span.className = "valid";
       } else if (counts[klasse] > rules[klasse]) {
         span.className = "invalid";
+        allValid = false;
       } else {
         span.className = "";
+        allValid = false;
       }
     });
+
+    // Fix #6: team completion status
+    const statusEl = document.getElementById("team-status");
+    if (allValid && !isOver) {
+      statusEl.textContent = "✅ Team compleet!";
+      statusEl.className = "team-status complete";
+    } else {
+      const missing = [];
+      Object.keys(rules).forEach(k => {
+        const diff = rules[k] - counts[k];
+        if (diff > 0) missing.push(`${diff}×${k}`);
+      });
+      const overPicks = Object.keys(rules).filter(k => counts[k] > rules[k]);
+      if (overPicks.length) {
+        statusEl.textContent = "❌ Te veel geselecteerd";
+      } else if (missing.length) {
+        statusEl.textContent = `Kies nog: ${missing.join(", ")}`;
+      } else {
+        statusEl.textContent = isOver ? "❌ Budget overschreden" : "";
+      }
+      statusEl.className = "team-status incomplete";
+    }
   }
 
-  resultsBody.addEventListener("input", () => {
+  // Fix #3: use a named function so it can be called directly (no self-referencing dispatchEvent)
+  function recalculate() {
     const rows = Array.from(resultsBody.querySelectorAll("tr"));
     const results = [];
 
@@ -290,7 +342,9 @@ document.addEventListener("DOMContentLoaded", () => {
       return bVal - aVal;
     });
     allRows.forEach(row => resultsBody.appendChild(row));
-  });
+  }
+
+  resultsBody.addEventListener("input", recalculate);
 
   function calculateAveragePoints(driverClass, start, end) {
     const pointsList = pointsTable[driverClass];
