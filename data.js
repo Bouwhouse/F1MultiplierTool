@@ -2,32 +2,32 @@
 
 // Coureurs + klasse (gesorteerd op klasse)
 const drivers = [
-  { name: "Russell", class: "A", price: 22, team: "Mercedes", flag: "gb" },
-  { name: "Antonelli", class: "A", price: 21, team: "Mercedes", flag: "it" },
-  { name: "Leclerc", class: "A", price: 20, team: "Ferrari", flag: "mc" },
+  { name: "Antonelli", class: "A", price: 22, team: "Mercedes", flag: "it" },
+  { name: "Russell", class: "A", price: 21, team: "Mercedes", flag: "gb" },
 
-  { name: "Hamilton", class: "B", price: 19, team: "Ferrari", flag: "gb" },
-  { name: "Verstappen", class: "B", price: 18, team: "Red Bull", flag: "nl" },
-  { name: "Piastri", class: "B", price: 17, team: "McLaren", flag: "au" },
+  { name: "Leclerc", class: "B", price: 18, team: "Ferrari", flag: "mc" },
   { name: "Norris", class: "B", price: 17, team: "McLaren", flag: "gb" },
+  { name: "Hamilton", class: "B", price: 17, team: "Ferrari", flag: "gb" },
+  { name: "Verstappen", class: "B", price: 16, team: "Red Bull", flag: "nl" },
+  { name: "Piastri", class: "B", price: 16, team: "McLaren", flag: "au" },
 
   { name: "Hadjar", class: "C", price: 14, team: "Red Bull", flag: "fr" },
-  { name: "Bearman", class: "C", price: 13, team: "Haas", flag: "gb" },
-  { name: "Gasly", class: "C", price: 13, team: "Alpine", flag: "fr" },
-  { name: "Lawson", class: "C", price: 12, team: "Racing Bulls", flag: "nz" },
-  { name: "Ocon", class: "C", price: 12, team: "Haas", flag: "fr" },
+  { name: "Gasly", class: "C", price: 14, team: "Alpine", flag: "fr" },
+  { name: "Lawson", class: "C", price: 13, team: "Racing Bulls", flag: "nz" },
 
+  { name: "Bearman", class: "D", price: 11, team: "Haas", flag: "gb" },
+  { name: "Colapinto", class: "D", price: 11, team: "Alpine", flag: "ar" },
   { name: "Lindblad", class: "D", price: 10, team: "Racing Bulls", flag: "gb" },
-  { name: "Colapinto", class: "D", price: 10, team: "Alpine", flag: "ar" },
-  { name: "Bortoleto", class: "D", price: 9, team: "Audi", flag: "br" },
-  { name: "Hülkenberg", class: "D", price: 9, team: "Audi", flag: "de" },
+  { name: "Ocon", class: "D", price: 10, team: "Haas", flag: "fr" },
+  { name: "Bortoleto", class: "D", price: 10, team: "Audi", flag: "br" },
 
+  { name: "Sainz", class: "E", price: 6, team: "Williams", flag: "es" },
+  { name: "Hülkenberg", class: "E", price: 6, team: "Audi", flag: "de" },
   { name: "Albon", class: "E", price: 5, team: "Williams", flag: "th" },
-  { name: "Sainz", class: "E", price: 5, team: "Williams", flag: "es" },
-  { name: "Alonso", class: "E", price: 5, team: "Aston Martin", flag: "es" },
-  { name: "Bottas", class: "E", price: 4, team: "Cadillac", flag: "fi" },
-  { name: "Pérez", class: "E", price: 4, team: "Cadillac", flag: "mx" },
-  { name: "Stroll", class: "E", price: 4, team: "Aston Martin", flag: "ca" }
+  { name: "Bottas", class: "E", price: 5, team: "Cadillac", flag: "fi" },
+  { name: "Pérez", class: "E", price: 5, team: "Cadillac", flag: "mx" },
+  { name: "Stroll", class: "E", price: 5, team: "Aston Martin", flag: "ca" },
+  { name: "Alonso", class: "E", price: 5, team: "Aston Martin", flag: "es" }
 ];
 
 // Puntentabel per klasse (positie 1 t/m 22)

@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const STORAGE_KEY = "selectedDrivers";
 
   const categories = ["A", "B", "C", "D", "E"];
-  const rules = { A: 1, B: 2, C: 2, D: 1, E: 2 };
+  const rules = { A: 1, B: 2, C: 1, D: 2, E: 2 };
 
   categories.forEach(cat => {
     const column = document.createElement("div");
